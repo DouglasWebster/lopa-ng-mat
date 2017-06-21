@@ -3,7 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { AlertService } from '../../services/index';
 
 @Component({
-  selector: 'app-login-alert',
+  selector: 'lpa-login-alert',
   templateUrl: './alert.component.html'
 })
 

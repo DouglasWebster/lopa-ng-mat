@@ -17,7 +17,7 @@ export function fakeBackendFactory(backend: MockBackend, options: BaseRequestOpt
 
         // find if any user matches login credentials
         const filteredUsers = users.filter(user => {
-          return user.username === params.username && user.password === params.password;
+          return user.userName === params.userName && user.password === params.password;
         });
 
         if (filteredUsers.length) {
@@ -28,7 +28,7 @@ export function fakeBackendFactory(backend: MockBackend, options: BaseRequestOpt
             body: {
               id: user.id,
               admin: user.admin,
-              username: user.username,
+              userName: user.userName,
               firstName: user.firstName,
               lastName: user.lastName,
               token: 'fake-jwt-token'
@@ -64,7 +64,7 @@ export function fakeBackendFactory(backend: MockBackend, options: BaseRequestOpt
           // find user by id in users array
           const urlParts = connection.request.url.split('/');
           const id = parseInt(urlParts[urlParts.length - 1], 10);
-          const matchedUsers = users.filter(user => { return user.id === id; });
+          const matchedUsers = users.filter(user => user.id === id);
           const user = matchedUsers.length ? matchedUsers[0] : null;
 
           // respond 200 OK with user
@@ -81,11 +81,12 @@ export function fakeBackendFactory(backend: MockBackend, options: BaseRequestOpt
       if (connection.request.url.endsWith('/api/users') && connection.request.method === RequestMethod.Post) {
         // get new user object from post body
         const newUser = JSON.parse(connection.request.getBody());
+        console.log('Trying to create user:', newUser);
 
         // validation
-        const duplicateUser = users.filter(user => { return user.username === newUser.username; }).length;
+        const duplicateUser = users.filter(user => user.userName === newUser.userName).length;
         if (duplicateUser) {
-          return connection.mockError(new Error('Username "' + newUser.username + '" is already taken'));
+          return connection.mockError(new Error('Username "' + newUser.userName + '" is already taken'));
         }
 
         // do we have an admin account? If not make give this user admin rights.
