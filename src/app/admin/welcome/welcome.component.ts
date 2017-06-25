@@ -28,14 +28,14 @@ export class WelcomeComponent implements OnInit {
     this.userService.getAll().subscribe(users => { this.users = users; });
   }
 
-  private doLogin() {
+  public doLogin() {
     const loginDlgRef  = this.loginDlg.open(LoginDialogComponent, {width: '450px'});
     loginDlgRef.afterClosed().subscribe(result => {
       console.log('Login Dialog returned', result);
     });
   }
 
-  private doNewUser() {
+  public doNewUser() {
     const registerDlgRef = this.registerDlg.open(RegisterDialogComponent, {width: '450px'});
     registerDlgRef.afterClosed().subscribe( result => {
       console.log('Register Dialog returned', result);
