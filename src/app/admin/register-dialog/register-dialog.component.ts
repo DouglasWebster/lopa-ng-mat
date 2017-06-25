@@ -34,7 +34,7 @@ export class RegisterDialogComponent implements OnInit {
     })
   }
 
-  private register() {
+  public register() {
     this.loading = true;
     this.prepareModel();
     this.userService.create(this.model)
