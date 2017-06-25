@@ -10,7 +10,7 @@ import { fakeBackendProvider } from './shared/helpers/fake-backend';
 import { MockBackend, MockConnection } from '@angular/http/testing';
 import { BaseRequestOptions } from '@angular/http';
 
-// Network services 
+// Network services
 import { AlertService, AuthenticationService, UserService } from './shared/services';
 import { LoginGuard } from './shared/guards/login.guard';
 
